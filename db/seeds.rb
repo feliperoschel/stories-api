@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Story.destroy_all if Rails.env.development?
+
+puts "Creating stories..."
+
+20.times do
+  story = Story.new(name: Faker::TvShows::GameOfThrones.character,
+                    text: Faker::TvShows::GameOfThrones.quote)
+  story.save!
+end
+
+puts "Created #{Story.count} stories..."
